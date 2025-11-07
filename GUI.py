@@ -29,11 +29,15 @@ def run_task():
 def download_thread(urls, choice):
     links_list = [url.strip() for url in urls.split(",") if url.strip()]
     total = len(links_list)
+    progress['maximum'] = total
+    progress['value'] = 0
 
     for i, url in enumerate(links_list, start=1):
         main.start_task(progress, url, folder, choice)
+        progress['value'] = i
         percent = int(i / total * 100)
         percent_label.config(text=f"{percent}%")
+        progress.update_idletasks()
 
     status_label.config(text="All files downloaded!")
 
