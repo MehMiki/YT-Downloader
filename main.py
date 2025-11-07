@@ -30,6 +30,10 @@ def start_task(progress_bar, url, folder, format_choice):
                 'noplaylist': False,
             }
 
+        else:
+            print(f"Invalid format choice: {format_choice}")
+            return
+
         with YoutubeDL(ydl_opts) as ydl:
             ydl.download([url])
 
